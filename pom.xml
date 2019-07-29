@@ -18,6 +18,7 @@
         </dependency>
     </dependencies>
 
+    <!--配置构建Build参数-->
     <build>
         <plugins>
             <!--jdk1.8-->
