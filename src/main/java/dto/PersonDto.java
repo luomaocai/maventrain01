@@ -9,6 +9,6 @@ import lombok.*;
 //自动生成全参构造方法,将所有成员属性作为参数
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class PersonDto {
-    private String name;
-    private int age;
+    protected String name;
+    protected int age;
 }
