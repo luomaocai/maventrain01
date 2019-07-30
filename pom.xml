@@ -22,18 +22,43 @@
             <artifactId>lombok</artifactId>
             <version>1.18.8</version>
         </dependency>
-        <!--log4j-->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.12.0</version>
-        </dependency>
-        <!--slf4j-->
+
+        <!--日志插件start-->
+        <!--日志门面slf4j,实际开发中采用slf4j的api编码-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.0-alpha0</version>
         </dependency>
+        <!--日志框架log4j,在运行时使用,编译时不用,所以scope为runtime-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.12.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!--slf4j调用log4j的实现-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.12.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!--log4j-web包是为了解决web环境下关闭服务器时可能会出现的log4j线程无法及时关闭的warn，
+        估计很多人都碰到过这个警告，但是没在意过，解决方式很简单，导入log4j-web这个依赖就行了-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+        <!--高并发,低延时架构插件,log4j2的异步logger会使用到-->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <!--日志插件end-->
+
     </dependencies>
 
     <!--配置构建Build参数-->
