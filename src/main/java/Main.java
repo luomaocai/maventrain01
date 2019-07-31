@@ -6,13 +6,16 @@ import org.slf4j.LoggerFactory;
 
 import java.util.logging.Level;
 
+/**
+ * @author Maocai
+ */
 public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
         logger.info("大家好,欢迎使用maventrain01,现在正在使用log4j打印日志");
 
-        testLof4j();
+        testSlf4j();
         testLombok();
     }
 
@@ -23,7 +26,7 @@ public class Main {
     * @Author: Maocai.Luo
     * @Date: 2019/7/30 
     */ 
-    public static void testLof4j(){
+    public static void testSlf4j(){
         logger.info("info级别");
         logger.debug("debug级别");
         logger.warn("warn级别");
