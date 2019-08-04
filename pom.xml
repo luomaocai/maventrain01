@@ -59,6 +59,24 @@
         </dependency>
         <!--日志插件end-->
 
+        <!--Spring框架Start-->
+        <!--common-logging,Spring-core依赖的-->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+
+
+        <!--Spring框架End-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.1.9.RELEASE</version>
+        </dependency>
+
+
     </dependencies>
 
     <!--配置构建Build参数-->
