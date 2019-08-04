@@ -1,6 +1,5 @@
 import dto.PersonDto;
 import dto.StudentDto;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,7 @@ import java.util.logging.Level;
  * @author Maocai
  */
 public class Main {
-    private static Logger logger = LoggerFactory.getLogger(Slf4j.class);
+    private static Logger logger = LoggerFactory.getLogger(Logger.class);
 
     public static void main(String[] args) {
         logger.info("大家好,欢迎使用maventrain01,现在正在使用log4j打印日志");
