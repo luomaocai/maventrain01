@@ -1,9 +1,11 @@
 import dto.PersonDto;
 import dto.StudentDto;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import service.BookService;
 
 import java.util.logging.Level;
 
@@ -11,13 +13,30 @@ import java.util.logging.Level;
  * @author Maocai
  */
 public class Main {
-    private static Logger logger = LoggerFactory.getLogger(Slf4j.class);
+    private static Logger logger = LoggerFactory.getLogger(Logger.class);
 
     public static void main(String[] args) {
         logger.info("大家好,欢迎使用maventrain01,现在正在使用log4j打印日志");
 
-        testSlf4j();
-        testLombok();
+        //testSlf4j();
+        //testLombok();
+        testSpring();
+    }
+
+    /**
+     * @Description: 测试spring
+     * @Param:
+     * @return:
+     * @Author: Maocai.Luo
+     * @Date: 2019/7/30
+     */
+    public static void testSpring(){
+        //通过.xml文件实例化context
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+        //取得IOC中的bean
+        BookService bookService = context.getBean(BookService.class);
+        bookService.initBook("高等数学","大学本科学习的数学内容",98.8F);
+        bookService.sayBook();
     }
 
     /** 
