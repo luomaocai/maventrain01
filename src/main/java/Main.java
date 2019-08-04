@@ -32,7 +32,7 @@ public class Main {
      */
     public static void testSpring(){
         //通过.xml文件实例化context
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/spring/applicationContext.xml");
         //取得IOC中的bean
         BookService bookService = context.getBean(BookService.class);
         bookService.initBook("高等数学","大学本科学习的数学内容",98.8F);

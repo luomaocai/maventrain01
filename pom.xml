@@ -66,15 +66,30 @@
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
         </dependency>
-
-
-
-        <!--Spring框架End-->
+        <!--Spring基本框架,自动依赖的:spring-core,spring-bean,spring-aop,spring-expression-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>5.1.9.RELEASE</version>
         </dependency>
+        <!--Spring单元测试支持-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.1.9.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Spring框架End-->
+
+        <!--单元测试Start-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.5.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!--单元测试End-->
 
 
     </dependencies>
