@@ -5,10 +5,27 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--
+    使用spring模块，需要提前加载声明文档,例如引入context就需要做以下两个操作:
+    1、声明标签命名空间,xmlns:context="http://www.springframework.org/schema/context"
+    2、引入对应的schemaLocation,如上
+    提示:
+    1、各个模块的命名空间与schemaLocation，前缀都是一样的,可以参考着把其他模块也引入进来
+    2、常用的模块beans,context,tx,aop,mvc
+    -->
+
 
     <!--启用注解-->
     <context:annotation-config />
+    <!--只扫描service包中的Service注解-->
+    <context:component-scan base-package="service">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    <!--只扫描model包中的compnent注解-->
+    <context:component-scan base-package="model">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+    </context:component-scan>
 
 
 </beans>
