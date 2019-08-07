@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--实例化门Door-->
+    <bean id="door" class="model.Door">
+        <constructor-arg name="name" value="罗茂才家的防盗门!" />
+        <constructor-arg name="price">
+            <value>998.9</value>
+        </constructor-arg>
+    </bean>
+
+</beans>

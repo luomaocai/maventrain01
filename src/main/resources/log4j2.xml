@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+日志优先级:OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL
+程序会打印>=所设置级别的日志，设置的日志等级越高，打印出来的日志就越少
+ -->
+<!--
+status:log4j2自身内部输出的日志级别,记载log4j2自身的运行情况,一般为warn
+monitorInterval:自动检测日志配置文件的间隔时间(秒),配置文件若被修改将会自动生效
+-->
+<Configuration status="WARN" monitorInterval="5">
+    <!-- 定义属性值,配置中其他地方通过${name}引用 -->
+    <Properties>
+        <!-- 定义日志文件根目录 -->
+        <Property name="logDir" value="logs" />
+        <!-- 定义日志的通用格式 -->
+        <Property name="genericPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        <!-- 定义日志分卷文件通用文件名形式 -->
+        <Property name="genericFilePattern" value="%d{yyyy-MM-dd}-%i" />
+    </Properties>
+
+    <!-- 定义日志输出方式 -->
+    <Appenders>
+        <!-- 控制台输出,target:SYSTEM_OUT|SYSTEM_ERR,一般默认SYSTEM_OUT -->
+        <Console name="consoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${genericPattern}" />
+        </Console>
+        <!-- 分卷文件输出,高性能
+        启用压缩,则需在filePattern后增加后缀：".gz",".zip",".bz2",".xz";
+        不启用压缩,则不需增加压缩格式后缀 -->
+        <RollingRandomAccessFile name="rollingRandomAccessFileAppender" fileName="${logDir}/app.log"
+                                 filePattern="${logDir}/app-${genericFilePattern}.log.zip" append="true">
+            <PatternLayout pattern="${genericPattern}" />
+            <!-- 日志文件分卷策略，以下条件只要有一个满足，日志文件就会被压缩分卷 -->
+            <Policies>
+                <!--基于时间来生成压缩文件， interval属性表示每隔多少个时间间隔，其单位为filePatten定义的文件日期最小单位，上面定义的是天-->
+                <TimeBasedTriggeringPolicy interval="1" />
+                <!-- 根据文件大小压缩,文件大小达到该值则进行压缩 -->
+                <SizeBasedTriggeringPolicy size="100MB" />
+                <!-- 启动时触发压缩 -->
+                <OnStartupTriggeringPolicy />
+            </Policies>
+            <!-- 同一目录下允许的存留的日志文件数量,超出该数量时则会删除最早的日志,再创建新日志文件 -->
+            <DefaultRolloverStrategy max="100" compressionLevel="9" />
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <!-- 定义logger们 -->
+    <Loggers>
+        <!--必须定义根日志,如果没有单独指定logger,就默认采用根日志输出-->
+        <!-- 定义异步根logger，也可为定义为普通的同步的，但是注意在同步根logger和异步根logger中只能存在一个 -->
+        <asyncRoot level="INFO">
+            <!--可以引用若干个appender,输出到不同的位置-->
+            <AppenderRef ref="consoleAppender" />
+            <AppenderRef ref="rollingRandomAccessFileAppender" />
+        </asyncRoot>
+        <!-- 普通的根logger，注意，跟上面的异步跟root同时只能存在一个 -->
+        <!-- <Root level="trace"> <AppenderRef ref="consoleAppender" /> </Root> -->
+
+        <!--
+        指定单独的日志输出形式,下面是一个异步logger
+        name:使用该logger的类(或包)的全路径
+        level:日志打印级别
+        additivity:是否同时在根logger指定的appender中输出
+        -->
+        <asyncLogger name="dto.PersonDto" level="DEBUG" additivity="false">
+            <AppenderRef ref="consoleAppender" />
+            <AppenderRef ref="rollingRandomAccessFileAppender" />
+        </asyncLogger>
+        <!-- 定义一个普通的logger,参数说明参考上面 -->
+        <Logger name="dto" level="ALL" additivity="false">
+            <AppenderRef ref="consoleAppender" />
+            <AppenderRef ref="rollingRandomAccessFileAppender" />
+        </Logger>
+    </Loggers>
+</Configuration>
